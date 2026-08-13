@@ -2,9 +2,9 @@
   "siteName": "Gh👻st_Payment",
   "headerLogo": "https://i.ibb.co.com/HfZfHNxR/file-0000000033d871fa847b05efa4141d75.png",
   "mobileBankingText": "মোবাইল ব্যাংকিং",
-  "payButtonText": "পে করুন 155.00",
-  "amountText": "৳ 155",
-  "amountValue": "155",
+  "payButtonText": "পে করুন ",
+  "amountText": "",
+  "amountValue": "",
   "modal": {
     "transactionLabel": "ট্রানজেকশন আইডি দিন",
     "transactionPlaceholder": "ট্রানজেকশন আইডি দিন",
@@ -28,7 +28,7 @@
       "boxColor": "#e2136e",
       "btnColor": "#b80f55",
       "ussd": "*247#",
-      "number": "01907293620"
+      "number": "01580691248"
     },
     {
       "name": "Nagad",
@@ -37,7 +37,7 @@
       "boxColor": "#ed1c24",
       "btnColor": "#c4141c",
       "ussd": "*167#",
-      "number": "01907293620"
+      "number": "01580691248"
     },
     {
       "name": "Rocket",
@@ -46,7 +46,7 @@
       "boxColor": "#8c1596",
       "btnColor": "#72107b",
       "ussd": "*322#",
-      "number": "01907293620"
+      "number": "01580691248"
     },
     {
       "name": "Upay",
@@ -55,7 +55,7 @@
       "boxColor": "#0056a4",
       "btnColor": "#004382",
       "ussd": "*268#",
-      "number": "01907293620"
+      "number": "01580691248"
     },
     {
       "name": "CellFin",
@@ -64,7 +64,7 @@
       "boxColor": "#00502b",
       "btnColor": "#003b1f",
       "ussd": "",
-      "number": "01907293620"
+      "number": "01580691248"
     },
     {
       "name": "Tap",
@@ -73,7 +73,7 @@
       "boxColor": "#00a651",
       "btnColor": "#008742",
       "ussd": "*283#",
-      "number": "01907293620"
+      "number": "01580691248"
     }
   ]
 }
