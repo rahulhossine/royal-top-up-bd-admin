@@ -1,0 +1,112 @@
+{
+  "categories": [
+    {
+      "id": "freefire-bd",
+      "name": "Free Fire BD",
+      "icon": "/assets/icons/freefire.png",
+      "description": "ফ্রি ফায়ার বাংলাদেশ সার্ভারের ডায়মন্ড ও সদস্যতা",
+      "status": "active",
+      "order": 1,
+      "products": [
+        {
+          "id": "ff-100",
+          "name": "১০০ ডায়মন্ড",
+          "image": "/uploads/products/ff-100.png",
+          "price": 120,
+          "old_price": 150,
+          "description": "ফ্রি ফায়ার বাংলাদেশ সার্ভারের জন্য ১০০ ডায়মন্ড",
+          "stock": 100,
+          "status": "active",
+          "requires_uid": true,
+          "server_option": ["BD", "Indonesia"],
+          "badge": "হট"
+        },
+        {
+          "id": "ff-500",
+          "name": "৫০০ ডায়মন্ড",
+          "image": "/uploads/products/ff-500.png",
+          "price": 550,
+          "old_price": 600,
+          "description": "ফ্রি ফায়ার বাংলাদেশ সার্ভারের জন্য ৫০০ ডায়মন্ড",
+          "stock": 50,
+          "status": "active",
+          "requires_uid": true,
+          "server_option": ["BD", "Indonesia"],
+          "badge": "সেরা অফার"
+        },
+        {
+          "id": "ff-membership",
+          "name": "সাপ্তাহিক সদস্যতা",
+          "image": "/uploads/products/ff-membership.png",
+          "price": 300,
+          "old_price": null,
+          "description": "ফ্রি ফায়ার সাপ্তাহিক সদস্যতা (৭ দিন)",
+          "stock": 999,
+          "status": "active",
+          "requires_uid": true,
+          "server_option": ["BD"],
+          "badge": null
+        }
+      ]
+    },
+    {
+      "id": "youtube-premium",
+      "name": "YouTube Premium",
+      "icon": "/assets/icons/youtube.png",
+      "description": "বিজ্ঞাপনমুক্ত ইউটিউব উপভোগ করুন",
+      "status": "active",
+      "order": 2,
+      "products": [
+        {
+          "id": "yt-1month",
+          "name": "১ মাস সাবস্ক্রিপশন",
+          "image": "/uploads/products/yt-1month.png",
+          "price": 250,
+          "old_price": null,
+          "description": "ইউটিউব প্রিমিয়াম ১ মাসের সাবস্ক্রিপশন",
+          "stock": 200,
+          "status": "active",
+          "requires_uid": false,
+          "server_option": [],
+          "badge": "জনপ্রিয়"
+        },
+        {
+          "id": "yt-3month",
+          "name": "৩ মাস সাবস্ক্রিপশন",
+          "image": "/uploads/products/yt-3month.png",
+          "price": 700,
+          "old_price": 750,
+          "description": "ইউটিউব প্রিমিয়াম ৩ মাসের সাবস্ক্রিপশন",
+          "stock": 150,
+          "status": "active",
+          "requires_uid": false,
+          "server_option": [],
+          "badge": "সাশ্রয়ী"
+        }
+      ]
+    },
+    {
+      "id": "netflix",
+      "name": "Netflix",
+      "icon": "/assets/icons/netflix.png",
+      "description": "Netflix প্রিমিয়াম সাবস্ক্রিপশন",
+      "status": "active",
+      "order": 3,
+      "products": [
+        {
+          "id": "nf-1month",
+          "name": "১ মাস সাবস্ক্রিপশন",
+          "image": "/uploads/products/nf-1month.png",
+          "price": 350,
+          "old_price": null,
+          "description": "Netflix ১ মাসের প্রিমিয়াম সাবস্ক্রিপশন",
+          "stock": 100,
+          "status": "active",
+          "requires_uid": false,
+          "server_option": [],
+          "badge": null
+        }
+      ]
+    }
+  ]
+}
