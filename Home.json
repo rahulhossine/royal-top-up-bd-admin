@@ -1,0 +1,81 @@
+{
+  "site": {
+    "name": "ROYAL TOPUP BD",
+    "tagline": "বিশ্বস্ত গেম টপআপ সেবা",
+    "logo": "/assets/images/logo.png",
+    "favicon": "/assets/images/favicon.ico",
+    "currency": "BDT",
+    "currency_symbol": "৳"
+  },
+  "contact": {
+    "phone": "+8801700000000",
+    "email": "support@royaltopupbd.com",
+    "facebook": "https://facebook.com/royaltopupbd",
+    "whatsapp": "https://wa.me/8801700000000",
+    "messenger": "https://m.me/royaltopupbd"
+  },
+  "payment_methods": [
+    {
+      "id": "bkash",
+      "name": "bKash",
+      "icon": "/assets/icons/bkash.png",
+      "status": "active"
+    },
+    {
+      "id": "nagad",
+      "name": "Nagad",
+      "icon": "/assets/icons/nagad.png",
+      "status": "active"
+    },
+    {
+      "id": "rocket",
+      "name": "Rocket",
+      "icon": "/assets/icons/rocket.png",
+      "status": "inactive"
+    }
+  ],
+  "banners": [
+    {
+      "id": 1,
+      "title": "ফ্রি ফায়ার ডায়মন্ড ২০% অফ!",
+      "subtitle": "অফারটি সীমিত সময়ের জন্য",
+      "image": "/uploads/banners/banner1.jpg",
+      "button_text": "অর্ডার করুন",
+      "button_link": "/shop?category=freefire",
+      "status": "active",
+      "order": 1
+    },
+    {
+      "id": 2,
+      "title": "ইউটিউব প্রিমিয়াম সাবস্ক্রাইব করুন",
+      "subtitle": "বিজ্ঞাপনমুক্ত ইউটিউব উপভোগ করুন",
+      "image": "/uploads/banners/banner2.jpg",
+      "button_text": "বিস্তারিত",
+      "button_link": "/shop?category=youtube",
+      "status": "active",
+      "order": 2
+    }
+  ],
+  "features": [
+    {
+      "icon": "fa-bolt",
+      "title": "১০ সেকেন্ডে ডেলিভারি",
+      "description": "অটো ডেলিভারি সিস্টেমে দ্রুততম সেবা"
+    },
+    {
+      "icon": "fa-clock",
+      "title": "২৪/৭ সেবা",
+      "description": "যেকোনো সময় টপআপ করতে পারবেন"
+    },
+    {
+      "icon": "fa-shield",
+      "title": "১০০% নিরাপদ",
+      "description": "আপনার তথ্য সুরক্ষিত রাখা হয়"
+    },
+    {
+      "icon": "fa-headset",
+      "title": "২৪/৭ সাপোর্ট",
+      "description": "যেকোনো সমস্যায় আমাদের সাথে যোগাযোগ করুন"
+    }
+  ]
+}
