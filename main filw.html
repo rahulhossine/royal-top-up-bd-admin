@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROYAL TOPUP BD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, Arial, sans-serif; background: #08070f; color: #f4f4f4; min-height: 100vh; padding: 12px 10px 30px; display: flex; flex-direction: column; align-items: center; }
+        .app-wrapper { width: 100%; max-width: 430px; }
+
+        /* ========== HEADER ========== */
+        .topup-header { width: 100%; background: linear-gradient(135deg, #1a0a2e, #2d1b4e, #4a1a6b); text-align: center; padding: 18px 10px 14px; border-radius: 16px 16px 0 0; margin-bottom: 10px; box-shadow: 0 8px 32px rgba(255, 215, 0, 0.15), 0 4px 20px rgba(0, 0, 0, 0.6); border-bottom: 2px solid rgba(255, 215, 0, 0.2); position: relative; overflow: hidden; }
+        .topup-header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(255, 215, 0, 0.03), transparent 60%); pointer-events: none; }
+        .logo { font-size: 24px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
+        .logo span:first-child { color: #ffd700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+        .logo span:last-child { color: #ff6b9d; text-shadow: 0 0 20px rgba(255, 107, 157, 0.3); }
+        .tagline { color: #c6bfd0; font-size: 12px; margin-top: 5px; letter-spacing: 1.5px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+
+        /* ========== BANNER ========== */
+        .banner { background: linear-gradient(135deg, #1a0a2e, #2d1b4e, #4a1a6b); border-radius: 16px; padding: 20px 18px; margin-bottom: 14px; position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.15); box-shadow: 0 8px 32px rgba(255, 215, 0, 0.08), 0 4px 20px rgba(0, 0, 0, 0.4); }
+        .banner::before { content: ''; position: absolute; top: -50%; right: -30%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent 70%); border-radius: 50%; pointer-events: none; }
+        .banner::after { content: ''; position: absolute; bottom: -40%; left: -20%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255, 107, 157, 0.06), transparent 70%); border-radius: 50%; pointer-events: none; }
+        .banner .banner-content { position: relative; z-index: 1; }
+        .banner .banner-badge { display: inline-block; background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 20px; padding: 3px 14px; font-size: 9px; color: #ffd700; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
+        .banner .banner-title { font-size: 20px; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 4px; }
+        .banner .banner-title .highlight { color: #ffd700; text-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
+        .banner .banner-sub { font-size: 12px; color: #c6bfd0; margin-bottom: 12px; }
+        .banner .banner-offer { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 215, 0, 0.08); border-radius: 10px; padding: 6px 14px; border: 1px solid rgba(255, 215, 0, 0.1); }
+        .banner .banner-offer .offer-icon { font-size: 16px; }
+        .banner .banner-offer .offer-text { font-size: 11px; color: #ffd700; font-weight: 600; }
+        .banner .banner-offer .offer-text span { font-size: 14px; font-weight: 800; }
+
+        /* ========== CARDS ========== */
+        .card { background: linear-gradient(145deg, #15151f, #1a1a26); border: 1px solid rgba(255, 215, 0, 0.08); border-radius: 16px; padding: 14px 14px 16px; margin-bottom: 14px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(255, 215, 0, 0.05); position: relative; overflow: hidden; }
+        .card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.02), transparent 70%); pointer-events: none; }
+        .card-title { font-size: 14px; font-weight: bold; margin-bottom: 12px; color: #f3f3f5; display: flex; align-items: center; gap: 6px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
+
+        /* ========== PAGE SYSTEM ========== */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* ========== CATEGORY BUTTONS ========== */
+        .category-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        .category-btn { background: linear-gradient(145deg, #1a1a28, #222233); border: 2px solid rgba(255, 215, 0, 0.08); border-radius: 12px; padding: 12px 6px; cursor: pointer; transition: all 0.3s ease; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; }
+        .category-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05), transparent 70%); opacity: 0; transition: opacity 0.3s ease; }
+        .category-btn:hover { border-color: #ffd700; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15); }
+        .category-btn:hover::before { opacity: 1; }
+        .category-btn .cat-image { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; display: block; margin: 0 auto 6px; border: 1px solid rgba(255, 215, 0, 0.1); }
+        .category-btn .cat-name { font-size: 10px; font-weight: 600; color: #e5e2e9; display: block; line-height: 1.2; }
+        .category-btn .badge { font-size: 8px; color: #ffd700; background: rgba(255, 215, 0, 0.08); padding: 1px 8px; border-radius: 8px; display: inline-block; margin-top: 3px; }
+
+        /* ========== PRODUCT PAGE ========== */
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+        .product-item { background: linear-gradient(145deg, #1a1a28, #1e1e2e); border: 2px solid rgba(255, 215, 0, 0.06); border-radius: 10px; padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; }
+        .product-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.04), transparent 70%); opacity: 0; transition: opacity 0.3s ease; }
+        .product-item:hover { border-color: rgba(255, 215, 0, 0.3); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.08); }
+        .product-item:hover::before { opacity: 1; }
+        .product-item.selected { border-color: #ffd700; background: linear-gradient(145deg, #28283b, #2d2d42); box-shadow: 0 0 20px rgba(255, 215, 0, 0.1); }
+        .product-item .p-name { font-size: 10px; font-weight: 600; color: #e5e2e9; }
+        .product-item .p-price { font-size: 11px; font-weight: 700; color: #ffd700; margin-top: 2px; }
+        .product-item .p-diamond { font-size: 9px; color: #48c9ff; margin-top: 2px; }
+
+        /* ========== BACK BUTTON ========== */
+        .back-btn { background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.15); border-radius: 8px; padding: 8px 16px; color: #ffd700; font-size: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px; }
+        .back-btn:hover { background: rgba(255, 215, 0, 0.15); border-color: #ffd700; }
+
+        /* ========== LOADING ========== */
+        .loading { text-align: center; padding: 30px 0; color: #888; font-size: 13px; }
+        .loading .spinner { display: inline-block; width: 30px; height: 30px; border: 3px solid rgba(255, 215, 0, 0.1); border-top: 3px solid #ffd700; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 10px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ========== ACCOUNT INFO (UID) ========== */
+        .account-info { background: linear-gradient(145deg, #1a1a28, #1e1e2e); border: 1px solid rgba(255, 215, 0, 0.08); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+        .account-info .label { font-size: 11px; color: #c6c4ce; display: block; margin-bottom: 4px; font-weight: 500; }
+        .account-info .check-btn-sm { background: linear-gradient(135deg, #ffd700, #f0a500); border: none; border-radius: 8px; padding: 6px 16px; color: #080808; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; }
+        .account-info .check-btn-sm:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25); }
+        .account-info .check-btn-sm:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .uid-input-group { display: flex; gap: 8px; align-items: center; }
+        .uid-input-group .input { flex: 1; height: 38px; border-radius: 8px; border: 1px solid #303143; background: linear-gradient(145deg, #1e1e2a, #242634); color: white; outline: none; padding: 0 12px; font-size: 13px; transition: all 0.3s ease; box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3); }
+        .uid-input-group .input::placeholder { color: #858591; }
+        .uid-input-group .input:focus { border-color: #ffd700; box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1); }
+
+        .uid-result { margin-top: 8px; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; display: none; text-align: center; }
+        .uid-result.success { display: block; background: rgba(0, 255, 100, 0.08); border: 1px solid rgba(0, 255, 100, 0.2); color: #00ff64; }
+        .uid-result.error { display: block; background: rgba(255, 0, 50, 0.08); border: 1px solid rgba(255, 0, 50, 0.2); color: #ff3355; }
+        .uid-result .name-display { color: #ffd700; font-size: 14px; }
+
+        /* ========== PAYMENT METHODS ========== */
+        .payment-methods-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .payment-method { background: linear-gradient(145deg, #1a1a28, #1e1e2e); border: 2px solid rgba(255, 215, 0, 0.06); border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
+        .payment-method:hover { border-color: rgba(255, 215, 0, 0.3); transform: translateY(-2px); }
+        .payment-method.selected { border-color: #ffd700; background: linear-gradient(145deg, #28283b, #2d2d42); box-shadow: 0 0 20px rgba(255, 215, 0, 0.1); }
+        .payment-method .pm-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+        .payment-method .pm-name { font-size: 10px; font-weight: 600; color: #e5e2e9; }
+        .payment-method .pm-sub { font-size: 8px; color: #888; margin-top: 2px; }
+
+        /* ========== BALANCE INFO ========== */
+        .balance-info { background: linear-gradient(145deg, #1f192b, #1a1525); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; border: 1px solid rgba(255, 215, 0, 0.05); box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3); }
+        .balance-info .bal-item { display: flex; justify-content: space-between; font-size: 11px; color: #c6c4ce; padding: 3px 0; }
+        .balance-info .bal-item .bal-amount { color: #ffd700; font-weight: 600; }
+
+        /* ========== BUY NOW BUTTON ========== */
+        .buy-now-btn { width: 100%; height: 48px; border: none; border-radius: 12px; background: linear-gradient(135deg, #ffd700, #f0a500); color: #080808; font-size: 16px; font-weight: 900; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px; box-shadow: 0 6px 24px rgba(255, 215, 0, 0.2); font-family: 'Orbitron', sans-serif; position: relative; overflow: hidden; }
+        .buy-now-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent); transition: left 0.5s ease; }
+        .buy-now-btn:hover::before { left: 100%; }
+        .buy-now-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(255, 215, 0, 0.35); }
+        .buy-now-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* ========== FOOTER ========== */
+        .footer-text { text-align: center; color: #686673; font-size: 9px; padding: 20px 0 10px; line-height: 1.6; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 430px) { .category-grid { grid-template-columns: 1fr 1fr 1fr; } .product-grid { grid-template-columns: 1fr 1fr 1fr; } .payment-methods-grid { grid-template-columns: 1fr 1fr 1fr; } .app-wrapper { padding: 0 4px; } .card { padding: 12px; } .banner { padding: 16px 14px; } .banner .banner-title { font-size: 17px; } .category-btn .cat-image { width: 40px; height: 40px; } }
+        @media (max-width: 360px) { .category-grid { grid-template-columns: 1fr 1fr; } .product-grid { grid-template-columns: 1fr 1fr; gap: 5px; } .payment-methods-grid { grid-template-columns: 1fr 1fr; } .product-item { padding: 8px 4px; } .product-item .p-name { font-size: 9px; } .product-item .p-price { font-size: 10px; } .banner .banner-title { font-size: 15px; } .banner .banner-offer .offer-text { font-size: 10px; } .category-btn .cat-image { width: 35px; height: 35px; } }
+
+        /* ============================================== */
+        /* ========== GATEWAY MODAL STYLES ADDED ========== */
+        /* ============================================== */
+        #gatewayOverlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: #f4f7fc; z-index: 99999; }
+        .gw-container { background: #ffffff; width: 100%; max-width: 400px; height: 100%; margin: 0 auto; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .gw-header { text-align: center; padding: 40px 20px 20px; }
+        .gw-main-logo { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto; display: block; object-fit: cover; border: 1px solid #eaeaea; }
+        .gw-header h1 { color: #6b7280; font-size: 20px; margin-top: 15px; text-transform: uppercase; font-family: 'Segoe UI', sans-serif;}
+        .gw-mobile-banking-btn { background-color: #0052cc; color: white; text-align: center; padding: 12px; margin: 0 20px 20px; border-radius: 6px; font-weight: 600; }
+        .gw-payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        .gw-payment-card { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 15px 10px; text-align: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.2s; display: flex; justify-content: center; align-items: center; height: 75px; }
+        .gw-payment-card img { max-width: 90%; max-height: 40px; object-fit: contain; }
+        .gw-payment-card:active { transform: scale(0.98); }
+        .gw-bottom-pay-btn { background: #dce7f9; color: #0052cc; text-align: center; padding: 15px; font-weight: bold; font-size: 16px; border-radius: 20px 20px 0 0; cursor: pointer; width: 100%; flex-shrink: 0; z-index: 5; }
+        .gw-cancel-btn { background: none; border: none; color: #6b7280; position: absolute; top: 15px; left: 15px; font-size: 20px; cursor: pointer; z-index: 10; }
+        .gw-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f4f7fc; display: none; flex-direction: column; z-index: 20; }
+        .gw-modal-header { background: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #eaeaea; }
+        .gw-back-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: #666; }
+        .gw-modal-logo-area { background: #fff; margin: 15px 20px; padding: 15px; text-align: center; border-radius: 8px; border: 1px solid #eaeaea; display: flex; justify-content: center; align-items: center; height: 80px; }
+        .gw-modal-logo-area img { max-height: 45px; object-fit: contain; }
+        .gw-amount-row { display: flex; justify-content: space-between; padding: 0 20px; margin-bottom: 15px; font-weight: bold; color: #444; align-items: center; }
+        .gw-small-logo { width: 24px; height: 24px; border-radius: 50%; vertical-align: middle; margin-right: 8px; object-fit: cover; }
+        .gw-amount-box { font-size: 18px; color: #444;}
+        .gw-instruction-box { margin: 0 20px; border-radius: 8px; color: white; padding: 20px; flex: 1; overflow-y: auto; }
+        .gw-input-group { margin-bottom: 20px; }
+        .gw-input-group label { display: block; text-align: center; margin-bottom: 10px; font-weight: bold; font-size: 14px; color: white;}
+        .trx-input { width: 100%; padding: 12px; border: none; border-radius: 4px; font-size: 14px; outline: none; color: red !important; font-weight: bold; text-align: center;}
+        .gw-steps { list-style: none; font-size: 13px; line-height: 1.6; color: white; padding: 0; margin: 0;}
+        .gw-steps li { margin-bottom: 12px; position: relative; padding-left: 15px; text-align: left; }
+        .gw-steps li::before { content: "•"; position: absolute; left: 0; top: 0; font-size: 16px; }
+        .gw-copy-btn { background: rgba(0,0,0,0.3); border: none; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; margin-left: 5px; }
+        .gw-verify-btn { color: white; border: none; padding: 15px; width: calc(100% - 40px); margin: 15px 20px 20px; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s; }
+    </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+    <!-- ========== HEADER ========== -->
+    <header class="topup-header" id="siteHeader">
+        <div class="logo"><span>ROYAL</span> <span>TOPUP BD</span></div>
+        <div class="tagline" id="tagline">Fast • Secure • Trusted Top-Up</div>
+    </header>
+
+    <!-- ========================================= -->
+    <!--  PAGE 1: HOME (Categories + Banner)      -->
+    <!-- ========================================= -->
+    <div class="page active" id="pageCategories">
+        
+        <!-- ====== BANNER ====== -->
+        <div class="banner" id="bannerContainer">
+            <div class="banner-content">
+                <div class="banner-badge">🔥 LIMITED OFFER</div>
+                <div class="banner-title">
+                    Get <span class="highlight">20% Extra</span> Diamonds Today!
+                </div>
+                <div class="banner-sub">Use code: <span style="color:#ffd700; font-weight:700;">ROYAL20</span> • Valid till 31 Dec</div>
+                <div class="banner-offer">
+                    <span class="offer-icon">⚡</span>
+                    <span class="offer-text">Extra <span>20%</span> on all UID Topups</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== CATEGORIES ====== -->
+        <section class="card">
+            <div class="card-title">📂 Select Category</div>
+            <div class="category-grid" id="categoryGrid">
+                <div class="loading" id="categoryLoading">
+                    <div class="spinner"></div>
+                    Loading categories...
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================= -->
+    <!--  PAGE 2: PRODUCT + PAYMENT               -->
+    <!-- ========================================= -->
+    <div class="page" id="pageProducts">
+        <section class="card">
+            <button class="back-btn" onclick="goBackToCategories()">← Back to Categories</button>
+            <div class="card-title" id="categoryTitle">🎮 Loading...</div>
+            
+            <!-- PRODUCT GRID -->
+            <div class="product-grid" id="productGrid">
+                <div class="loading" id="productLoading">
+                    <div class="spinner"></div>
+                    Loading products...
+                </div>
+            </div>
+
+            <!-- ========================================= -->
+            <!--  2. ACCOUNT INFO (UID)                   -->
+            <!-- ========================================= -->
+            <div class="account-info" style="margin-top:14px;">
+                <div style="font-size:12px; font-weight:600; color:#e5e2e9; margin-bottom:8px;">👤 Account Info</div>
+                
+                <div class="uid-input-group">
+                    <input type="number" class="input" id="uidInput" placeholder="Player UID" style="margin-bottom:0;">
+                    <button class="check-btn-sm" id="uidCheckBtn" onclick="checkUID()">CHECK</button>
+                </div>
+                
+                <div class="uid-result" id="uidResult">
+                    <span id="uidResultText"></span>
+                </div>
+                
+                <div style="margin-top:6px; font-size:9px; color:#666; text-align:center;">
+                    Click CHECK to verify player name
+                </div>
+            </div>
+
+            <!-- ========================================= -->
+            <!--  3. PAYMENT METHODS                      -->
+            <!-- ========================================= -->
+            <div style="margin-top:14px;">
+                <div style="font-size:12px; font-weight:600; color:#e5e2e9; margin-bottom:8px;">💳 Payment Methods</div>
+                
+                <div class="payment-methods-grid" id="paymentMethodsGrid">
+                    <!-- Payment methods loaded from JSON -->
+                </div>
+
+                <!-- Balance Info -->
+                <div class="balance-info" id="balanceInfo">
+                    <div class="bal-item">
+                        <span>💳 প্ল্যাটফর্ম ফি</span>
+                        <span class="bal-amount" id="platformFee">৳ 50</span>
+                    </div>
+                    <div class="bal-item">
+                        <span>💰 আপনার অ্যাকাউন্ট ব্যালেন্স</span>
+                        <span class="bal-amount" id="userBalance">৳ 50</span>
+                    </div>
+                </div>
+
+                <!-- BUY NOW Button (Now triggers gateway) -->
+                <button class="buy-now-btn" id="buyNowBtn" onclick="initiatePayment()">
+                    🛒 BUY NOW
+                </button>
+                
+                <div style="text-align:center; color:#8f8d98; font-size:10px; margin-top:8px;">
+                    Click BUY NOW to place your order
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <div class="footer-text" id="footerContainer">© 2026 ROYAL TOPUP BD <br> All Rights Reserved</div>
+
+</div>
+
+<!-- ========================================= -->
+<!--  GATEWAY OVERLAY (HIDDEN BY DEFAULT)      -->
+<!-- ========================================= -->
+<div id="gatewayOverlay">
+    <div class="gw-container">
+        <!-- Main Screen -->
+        <div id="gwMainScreen" style="display: flex; flex-direction: column; height: 100%; width: 100%; position: relative;">
+            <button class="gw-cancel-btn" onclick="cancelPayment()">❮</button>
+            <div style="flex: 1; overflow-y: auto;">
+                <div class="gw-header">
+                    <img id="gwMainLogo" src="" alt="Logo" class="gw-main-logo">
+                    <h1 id="gwSiteTitle">ROYAL TOPUP BD</h1>
+                </div>
+                <div class="gw-mobile-banking-btn" id="gwMobileBankingText">মোবাইল ব্যাংকিং</div>
+                <div class="gw-payment-grid" id="gwPaymentGrid"></div>
+                <div style="height: 30px;"></div>
+            </div>
+            <div class="gw-bottom-pay-btn" id="gwBottomPayBtn"></div>
+        </div>
+
+        <!-- Details Modal -->
+        <div class="gw-modal" id="gwPaymentModal">
+            <div class="gw-modal-header">
+                <button class="gw-back-btn" onclick="closeGatewayModal()">❮</button>
+                <span style="color: #666; font-size: 14px;">A/EN ✕</span>
+            </div>
+            <div class="gw-modal-logo-area">
+                <img id="gwModalLogoImg" src="" alt="Payment Logo">
+            </div>
+            <div class="gw-amount-row">
+                <div>
+                    <img id="gwSmallLogo" src="" alt="icon" class="gw-small-logo">
+                    <span id="gwModalSiteName" style="vertical-align: middle;">ROYAL TOPUP BD</span>
+                </div>
+                <div class="gw-amount-box" id="gwModalAmountBox"></div>
+            </div>
+            <div class="gw-instruction-box" id="gwInstructionBox">
+                <div class="gw-input-group">
+                    <label id="gwTrxLabel">ট্রানজেকশন আইডি দিন</label>
+                    <input type="text" id="gwTrxInput" class="trx-input" placeholder="">
+                </div>
+                <ul class="gw-steps" id="gwStepsList"></ul>
+            </div>
+            <button class="gw-verify-btn" id="gwVerifyBtn" onclick="verifyAndSendWhatsApp()">ভেরিফাই</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // =============================================
+    // CONFIG: JSON URL
+    // =============================================
+    const JSON_URL = 'https://raw.githubusercontent.com/rahulhossine/royal-top-up-bd-admin/refs/heads/main/royal.json';
+
+    // =============================================
+    // STATE
+    // =============================================
+    let appData = null;
+    let selectedPackage = null;
+    let selectedPayment = 'bKash';
+    let verifiedUID = null;
+    let verifiedName = null;
+    let categoriesData = [];
+
+    // =============================================
+    // GATEWAY STATE
+    // =============================================
+    let gwGlobalData = null;
+    let gwSelectedMethodName = "";
+    let gwSelectedMethodNumber = "";
+
+    // Load Ghost Payment JSON for Gateway 
+    fetch("https://raw.githubusercontent.com/rahulhossine/royal-top-up-bd-admin/refs/heads/main/Ghost%20Payment.json")
+        .then(response => response.json())
+        .then(data => {
+            gwGlobalData = data;
+            document.getElementById("gwMobileBankingText").innerText = data.mobileBankingText;
+            document.getElementById("gwMainLogo").src = data.headerLogo;
+            document.getElementById("gwSmallLogo").src = data.headerLogo;
+            
+            const grid = document.getElementById("gwPaymentGrid");
+            grid.innerHTML = "";
+            data.paymentMethods.forEach((method, index) => {
+                if(method.status === "on" || method.status === true) {
+                    const card = document.createElement("div");
+                    card.className = "gw-payment-card";
+                    card.onclick = () => openGatewayModal(index);
+                    card.innerHTML = `<img src="${method.logo}" alt="${method.name}">`;
+                    grid.appendChild(card);
+                }
+            });
+        }).catch(err => console.error("Gateway JSON Error: ", err));
+
+    // =============================================
+    // LOAD DATA FROM JSON (ROYAL TOPUP BD)
+    // =============================================
+    async function loadAppData() {
+        try {
+            const response = await fetch(JSON_URL);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            appData = await response.json();
+            
+            // Populate site
+            populateSite(appData);
+            renderCategories(appData.categories || []);
+            renderPaymentMethods(appData.paymentMethods || []);
+            updateBalanceInfo(appData.balanceInfo || {});
+        } catch (error) {
+            document.getElementById('categoryGrid').innerHTML = `
+                <div style="color:#ff3355; font-size:13px; grid-column:1/-1; text-align:center; padding:20px;">
+                    ❌ Failed to load data. Please check your internet connection and JSON URL.
+                </div>
+            `;
+        }
+    }
+
+    // =============================================
+    // POPULATE SITE FROM JSON
+    // =============================================
+    function populateSite(data) {
+        if (data.siteInfo) {
+            const header = document.getElementById('siteHeader');
+            if (header) {
+                const logo = header.querySelector('.logo');
+                if (logo) {
+                    const nameParts = data.siteInfo.name.split(' ');
+                    logo.innerHTML = `<span>${nameParts[0]}</span> <span>${nameParts.slice(1).join(' ')}</span>`;
+                }
+                const tagline = document.getElementById('tagline');
+                if (tagline) tagline.textContent = data.siteInfo.tagline || 'Fast • Secure • Trusted Top-Up';
+            }
+            
+            const banner = document.getElementById('bannerContainer');
+            if (banner && data.siteInfo.banner) {
+                banner.innerHTML = `
+                    <div class="banner-content">
+                        <div class="banner-badge">${data.siteInfo.banner.badge || ''}</div>
+                        <div class="banner-title">${data.siteInfo.banner.title || ''}</div>
+                        <div class="banner-sub">${data.siteInfo.banner.subtitle || ''}</div>
+                        <div class="banner-offer">
+                            <span class="offer-icon">⚡</span>
+                            <span class="offer-text">${data.siteInfo.banner.offer || ''}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const footer = document.getElementById('footerContainer');
+            if (footer && data.siteInfo.footer) footer.innerHTML = data.siteInfo.footer;
+        }
+    }
+
+    function updateBalanceInfo(balanceInfo) {
+        if (balanceInfo) {
+            const platformFee = document.getElementById('platformFee');
+            const userBalance = document.getElementById('userBalance');
+            if (platformFee) platformFee.textContent = balanceInfo.platformFee || '৳ 50';
+            if (userBalance) userBalance.textContent = balanceInfo.balance || '৳ 50';
+        }
+    }
+
+    function renderCategories(categories) {
+        const grid = document.getElementById('categoryGrid');
+        if (!categories || categories.length === 0) {
+            grid.innerHTML = `<div style="color:#888; grid-column:1/-1; text-align:center; padding:20px;">No categories found</div>`;
+            return;
+        }
+        categoriesData = categories;
+        grid.innerHTML = '';
+        categories.forEach(cat => {
+            const btn = document.createElement('div');
+            btn.className = 'category-btn';
+            const itemCount = (cat.products || []).length;
+            btn.innerHTML = `
+                <img src="${cat.image || ''}" alt="${cat.name}" class="cat-image" onerror="this.style.display='none'">
+                <span class="cat-name">${cat.name}</span>
+                <span class="badge">${itemCount} items</span>
+            `;
+            btn.onclick = () => openCategory(cat.id);
+            grid.appendChild(btn);
+        });
+    }
+
+    function renderPaymentMethods(methods) {
+        const grid = document.getElementById('paymentMethodsGrid');
+        if (!methods || methods.length === 0) {
+            grid.innerHTML = '<div style="color:#888; grid-column:1/-1; text-align:center; padding:10px;">No payment methods</div>';
+            return;
+        }
+        grid.innerHTML = '';
+        methods.forEach((method, index) => {
+            const div = document.createElement('div');
+            div.className = `payment-method ${index === 0 ? 'selected' : ''}`;
+            div.dataset.method = method.id;
+            div.innerHTML = `
+                <span class="pm-icon">${method.icon || '💳'}</span>
+                <span class="pm-name">${method.name || 'Payment'}</span>
+                <span class="pm-sub">${method.sub || ''}</span>
+            `;
+            div.onclick = function() { selectPayment(this); };
+            grid.appendChild(div);
+        });
+        if (methods.length > 0) selectedPayment = methods[0].id;
+    }
+
+    function openCategory(categoryId) {
+        const category = categoriesData.find(c => c.id === categoryId);
+        if (!category) { alert('Category not found!'); return; }
+        
+        document.getElementById('categoryTitle').textContent = '🎮 ' + category.name;
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        
+        const products = category.products || [];
+        if (products.length === 0) {
+            grid.innerHTML = `<div style="color:#888; font-size:13px; text-align:center; grid-column:1/-1; padding:20px;">No products available</div>`;
+        } else {
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                item.dataset.price = product.price || '0';
+                item.dataset.name = product.name || 'Unknown';
+                item.dataset.diamond = product.diamond || '';
+                item.innerHTML = `
+                    <div class="p-name">${product.name || 'Product'}</div>
+                    <div class="p-price">${product.price ? '৳ ' + product.price : ''}</div>
+                    <div class="p-diamond">${product.diamond || ''}</div>
+                `;
+                item.onclick = function() { selectProduct(this); };
+                grid.appendChild(item);
+            });
+        }
+        
+        selectedPackage = null;
+        verifiedUID = null;
+        verifiedName = null;
+        document.getElementById('uidResult').style.display = 'none';
+        document.getElementById('uidInput').value = '';
+        updateBuyButton();
+        showPage('pageProducts');
+    }
+
+    function goBackToCategories() {
+        selectedPackage = null;
+        verifiedUID = null;
+        verifiedName = null;
+        document.getElementById('uidResult').style.display = 'none';
+        document.getElementById('uidInput').value = '';
+        updateBuyButton();
+        document.querySelectorAll('.product-item').forEach(p => p.classList.remove('selected'));
+        showPage('pageCategories');
+    }
+
+    function selectProduct(element) {
+        document.querySelectorAll('.product-item').forEach(item => {
+            item.classList.remove('selected');
+            item.style.borderColor = '';
+            item.style.background = '';
+        });
+        element.classList.add('selected');
+        element.style.borderColor = '#ffd700';
+        element.style.background = 'linear-gradient(145deg, #28283b, #2d2d42)';
+        selectedPackage = { name: element.dataset.name, price: element.dataset.price, diamond: element.dataset.diamond };
+        updateBuyButton();
+    }
+
+    function selectPayment(element) {
+        document.querySelectorAll('.payment-method').forEach(item => item.classList.remove('selected'));
+        element.classList.add('selected');
+        selectedPayment = element.dataset.method;
+    }
+
+    const API_KEY = 'wOXLBvK802Fk_aTlR-kbdpQsWWx9qqHPY_o_7Ngp5J4';
+    const uidInput = document.getElementById('uidInput');
+    const uidCheckBtn = document.getElementById('uidCheckBtn');
+    const uidResult = document.getElementById('uidResult');
+    const uidResultText = document.getElementById('uidResultText');
+
+    async function checkUID() {
+        const uid = uidInput.value.trim();
+        if (!uid) {
+            uidResult.className = 'uid-result error';
+            uidResultText.innerHTML = '⚠️ Please enter a UID';
+            uidResult.style.display = 'block';
+            return;
+        }
+
+        uidCheckBtn.disabled = true;
+        uidCheckBtn.textContent = '...';
+        uidResult.style.display = 'none';
+
+        try {
+            const url = 'https://api.gameskinbo.com/ff-info/get?uid=' + encodeURIComponent(uid) + '&region=BD';
+            const response = await fetch(url, { method: 'GET', headers: { 'x-api-key': API_KEY } });
+            const data = await response.json();
+
+            if (!response.ok || data.error) throw new Error('INVALID_UID');
+            const gameName = data.AccountInfo?.AccountName;
+            if (!gameName) throw new Error('INVALID_UID');
+
+            verifiedUID = uid;
+            verifiedName = gameName;
+            uidResult.className = 'uid-result success';
+            uidResultText.innerHTML = '✅ Player: <span class="name-display">' + gameName + '</span>';
+            uidResult.style.display = 'block';
+            updateBuyButton();
+
+        } catch (error) {
+            verifiedUID = null;
+            verifiedName = null;
+            uidResult.className = 'uid-result error';
+            uidResultText.innerHTML = '❌ Invalid UID or Player not found';
+            uidResult.style.display = 'block';
+            updateBuyButton();
+        } finally {
+            uidCheckBtn.disabled = false;
+            uidCheckBtn.textContent = 'CHECK';
+        }
+    }
+
+    uidInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkUID(); });
+    uidInput.addEventListener('input', function() {
+        uidResult.style.display = 'none';
+        verifiedUID = null;
+        verifiedName = null;
+        updateBuyButton();
+    });
+
+    function updateBuyButton() {
+        const btn = document.getElementById('buyNowBtn');
+        const hasPackage = selectedPackage !== null;
+        const hasUID = verifiedUID !== null;
+
+        if (hasPackage && hasUID) {
+            btn.disabled = false;
+            btn.textContent = '🛒 BUY NOW';
+        } else {
+            btn.disabled = true;
+            if (!hasPackage && !hasUID) btn.textContent = '⚠️ Select package & verify UID';
+            else if (!hasPackage) btn.textContent = '⚠️ Select a package first';
+            else if (!hasUID) btn.textContent = '⚠️ Verify your UID first';
+        }
+    }
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+        updateBuyButton();
+        loadAppData();
+    });
+
+    // =============================================
+    // GATEWAY FUNCTIONS
+    // =============================================
+    function initiatePayment() {
+        if (!selectedPackage) { alert('Please select a package first.'); return; }
+        if (!verifiedUID) { alert('Please verify your UID first.'); return; }
+        if (!gwGlobalData) { alert("Payment gateway is loading, please wait..."); return; }
+
+        const price = selectedPackage.price;
+        document.getElementById("gwBottomPayBtn").innerText = `পে করুন ৳ ${price}`;
+        document.getElementById("gwModalAmountBox").innerText = `৳ ${price}`;
+        
+        // Show Gateway
+        document.getElementById("gatewayOverlay").style.display = "block";
+    }
+
+    function cancelPayment() {
+        document.getElementById("gatewayOverlay").style.display = "none";
+        document.getElementById('gwPaymentModal').style.display = 'none';
+        document.getElementById('gwMainScreen').style.display = 'flex';
+        document.getElementById('gwTrxInput').value = "";
+    }
+
+    function openGatewayModal(methodIndex) {
+        if(!gwGlobalData) return;
+        const method = gwGlobalData.paymentMethods[methodIndex];
+        const modalData = gwGlobalData.modal;
+        
+        gwSelectedMethodName = method.name;
+        gwSelectedMethodNumber = method.number;
+        
+        document.getElementById('gwMainScreen').style.display = 'none';
+        document.getElementById('gwPaymentModal').style.display = 'flex';
+        
+        document.getElementById('gwModalLogoImg').src = method.logo;
+        document.getElementById('gwInstructionBox').style.backgroundColor = method.boxColor;
+        document.getElementById('gwVerifyBtn').style.backgroundColor = method.btnColor;
+        document.getElementById('gwTrxLabel').innerText = modalData.transactionLabel;
+        document.getElementById('gwTrxInput').placeholder = modalData.transactionPlaceholder;
+        document.getElementById('gwVerifyBtn').innerText = modalData.verifyBtnText;
+        
+        const stepsUl = document.getElementById('gwStepsList');
+        stepsUl.innerHTML = "";
+        
+        modalData.steps.forEach(step => {
+            let liHTML = step.replace(/{method}/g, method.name)
+                             .replace(/{ussd}/g, method.ussd)
+                             .replace(/{number}/g, method.number)
+                             .replace(/{amount}/g, selectedPackage.price); // Show product amount
+            
+            if (liHTML.includes("{copy_button}")) {
+                liHTML = liHTML.replace(/{copy_button}/g, `<button class="gw-copy-btn" onclick="copyGwNumber('${method.number}')">${modalData.copyBtnText}</button>`);
+            }
+            if (!method.ussd || method.ussd.trim() === "") {
+                liHTML = liHTML.replace(" ডায়াল কোড দিন অথবা আপনার ", "আপনার ");
+            }
+            const li = document.createElement("li");
+            li.innerHTML = liHTML;
+            stepsUl.appendChild(li);
+        });
+    }
+
+    function closeGatewayModal() {
+        document.getElementById('gwPaymentModal').style.display = 'none';
+        document.getElementById('gwMainScreen').style.display = 'flex';
+    }
+
+    function copyGwNumber(number) {
+        navigator.clipboard.writeText(number).then(() => alert("Number copied: " + number));
+    }
+
+    function verifyAndSendWhatsApp() {
+        const trxId = document.getElementById('gwTrxInput').value.trim();
+        if(trxId === "") { alert("দয়া করে ট্রানজেকশন আইডি দিন!"); return; }
+
+        // WhatsApp Message Format with UID, Package, Amount and Gateway Trx ID
+        const message = `👑 ROYAL TOPUP BD - NEW ORDER\n\n` +
+                        `🎮 Player UID: ${verifiedUID}\n` +
+                        `👤 Player Name: ${verifiedName}\n` +
+                        `💎 Package: ${selectedPackage.diamond || selectedPackage.name}\n` +
+                        `💰 Price: ৳${selectedPackage.price}\n` +
+                        `💳 Payment Method: ${gwSelectedMethodName}\n` +
+                        `📱 Sent To: ${gwSelectedMethodNumber}\n` +
+                        `🧾 Trx ID: ${trxId}`;
+
+        const waUrl = `https://wa.me/8801580691248?text=${encodeURIComponent(message)}`;
+        window.open(waUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
